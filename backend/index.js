@@ -11,7 +11,8 @@ sequelize.authenticate()
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:3000' }
+    origin: ['http://localhost:3000',
+             'https://interactive-comments-section-main-1.onrender.com']}
 )); 
 
 app.use(express.json())
