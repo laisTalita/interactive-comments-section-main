@@ -1,0 +1,55 @@
+.modal_delete{
+    position: fixed;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 900;
+    background-color: rgba(22, 22, 22, 0.502);
+}
+.confirm_modal{
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5em;
+    background-color: var(--White);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius:7px;
+}
+.confirm_modal h2{
+font-size: 1.1em;
+color: var(--Grey80);
+margin-bottom: 1.2em;
+
+}
+.confirm_modal p{
+    color: var(--Grey50);
+    margin-bottom: 1em;
+    line-height: 1.5em;
+}
+.flex_buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.flex_buttons button{
+    width: 48%;
+    border-radius: 7px;
+    border: none;
+    font-size: 1em;
+    color: white;
+    padding: 0.8em;
+    text-transform: uppercase;
+    background-color: var(--Grey50);
+}
+
+.but_delete{
+    background-color: var(--Pink400) !important;
+}
+@media (min-width:814px) {
+    .confirm_modal h2{
+        font-size: 1.4em;
+    }
+    .confirm_modal p{
+        font-size: 1.1em;
+    }
+}

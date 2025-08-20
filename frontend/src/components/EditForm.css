@@ -1,0 +1,31 @@
+#form_update{
+    display: flex;
+    flex-direction: column;
+}
+#form_update textarea{
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+    font-family: var(--font);
+    color: var(--Grey50);
+    padding: 1em;
+    border-radius: 5px;
+    border: 1px solid var(--Purple600);
+}
+#form_update button{
+    margin-left: auto;
+    margin-top: 1em;
+    background-color: var(--Purple600);
+    padding: 0.9em 1.2em;
+    color: var(--White);
+    border-radius: 7px;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+#form_update button:hover{
+  background-color: var(--Purple200);
+;
+}
