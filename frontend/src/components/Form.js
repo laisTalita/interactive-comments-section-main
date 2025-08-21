@@ -4,11 +4,6 @@ import { useEffect,useState } from 'react'
 function Form({buttonName,name,func}) {
 
     const[text,setText] = useState('')
-    useEffect(()=>{
-        if (name) {
-        setText(`@${name}`)
-        }
-    },[name])
     
     function submit_Comment(e) {
         e.preventDefault()
@@ -20,7 +15,7 @@ function Form({buttonName,name,func}) {
         <div className='text_comment'>
             <form id='commentForm' className='form' onSubmit={submit_Comment} action="" >
             < textarea value={text} onChange={e => setText(e.target.value)} 
-                placeholder= { text ? text :"Add a comment..."}
+                placeholder= { name ? name :"Add a comment..."}
             ></textarea>
             </form>
             <img src='./images/avatars/image-juliusomo.png'/>
