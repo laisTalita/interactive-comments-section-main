@@ -27,7 +27,7 @@ function App() {
   }
 
      const fetch_init = ()=>{
-      fetch('http://localhost:5000/comments')
+      fetch('https://interactive-comments-section-main-70m9.onrender.com/comments')
         .then(res => res.json())
         .then(data => {
           setDados(data);
@@ -40,7 +40,7 @@ function App() {
           fetch_init()
      },[])
     function vote(id, userId, x) {
-      fetch("http://localhost:5000/comments/vote",{
+      fetch("https://interactive-comments-section-main-70m9.onrender.com/comments/vote",{
         method:"put",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({id, userId,x})
@@ -54,7 +54,7 @@ function App() {
       })
     }
     function update(id, text) {
-       fetch('http://localhost:5000/comments/updade',{
+       fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/updade',{
           method:'put',
           headers:{"Content-Type":"application/json"},
           body: JSON.stringify({
@@ -71,7 +71,7 @@ function App() {
     }
     function print(content,replying_to =null,parent_id =null,user_id) {
 
-      fetch('http://localhost:5000/comments/dados',{
+      fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/dados',{
         method:'post',
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
@@ -97,7 +97,7 @@ function App() {
           <Delete 
             onCancel={() => setComponent_delete(false)}
             component_id={()=> {
-              fetch('http://localhost:5000/comments/delete', {
+              fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/delete', {
                   method:"delete",
                   headers:{"Content-Type":"application/json"},
                   body: JSON.stringify({
