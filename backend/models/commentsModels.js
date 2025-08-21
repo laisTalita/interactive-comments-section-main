@@ -49,6 +49,7 @@ Comments.belongsTo(Comments,{as:'parent', foreignKey:'parent_id'})
 Comments.belongsTo(Users,{foreignKey:'user_id',as:'user'})
 Users.hasMany(Comments,{foreignKey:'user_id'})
 
+
 async function initializeDatabase() {
   try {
     await sequelize.sync();

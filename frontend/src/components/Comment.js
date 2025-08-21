@@ -6,8 +6,7 @@ function Comment({comment,children,actions}) {
     
 const { id, content, score, timeAgo, replying_to, user, parent_id } = comment;
 
-
-    return(
+  return(
     <>
         <div className='const_comments'>
             <section  className='comment sec_comment'>
@@ -55,7 +54,7 @@ const { id, content, score, timeAgo, replying_to, user, parent_id } = comment;
                     </button>
                 </div>
             {
-                user.id !== 1 ? (
+                user.id !== 1 ? (s
                     <button className='reply noJuli' 
                     onClick={()=>{
                         actions.setReplying(user.username);
