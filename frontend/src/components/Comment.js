@@ -30,12 +30,9 @@ const { id, content, score, timeAgo, replying_to, user, parent_id } = comment;
                         ):(
                             <>
                             {replying_to ?(
-                                <>
-                                <span className='span_repling'>
-                                    @{replying_to}
-                                </span>
-                                <p className='inline'>{content}</p>
-                                </>
+                                <p className='inline'>
+                                  <span className='span_repling'>@{replying_to} </span>{content}
+                                /p>
                             ) 
                             :(content)
                             }
@@ -44,37 +41,37 @@ const { id, content, score, timeAgo, replying_to, user, parent_id } = comment;
                     </div>
                 </div>
                 <div className='order'>
-                    <button className='plus_less' onClick={()=> actions.vote(id , user.id,"up")}>
-                        <img src='./images/icon-plus.svg'/>
+                    <button className='plus_less'  aria-label="Increment score" onClick={()=> actions.vote(id , user.id,"up")}>
+                        <img src='./images/icon-plus.svg' alt=""/>
                     </button>
                     <span className='likes'>{score}</span>
 
-                    <button className='plus_less' onClick={()=> actions.vote(id,user.id,"down")}>
-                        <img src='./images/icon-minus.svg'/>
+                    <button className='plus_less' aria-label="Decrement score" onClick={()=> actions.vote(id,user.id,"down")}>
+                        <img src='./images/icon-minus.svg' alt=""/>
                     </button>
                 </div>
             {
                 user.id !== 1 ? (
-                    <button className='reply noJuli' 
+                    <button  className='reply noJuli' aria-label="Reply to.."  
                     onClick={()=>{
                         actions.setReplying(user.username);
                         actions.setReplyingToId(parent_id || id);
                     }}>
-                    <img src='./images/icon-reply.svg'/> <p>Reply</p>
+                    <img src='./images/icon-reply.svg' alt=""/> <p>Reply</p>
                     </button>
                 ):
                 (
                 <div className='delete_alter reply'>
-                    <button onClick={()=> {
+                    <button aria-label="Delete comment" onClick={()=> {
                         actions.setComponent_delete(true);
                         actions.setIdComponent_delete(id)
                     }} >
-                        <img src='./images/icon-delete.svg'/><p>Delete</p>
+                        <img src='./images/icon-delete.svg' alt=""/><p>Delete</p>
                     </button>
-                    <button onClick={()=>{
+                    <button aria-label="Alter comment" onClick={()=>{
                         actions.setEditForm(id)
                     }}>
-                        <img src='./images/icon-edit.svg' /><p>Edit</p>
+                        <img src='./images/icon-edit.svg' alt=""/><p>Edit</p>
                     </button>
                 </div>
                 )
