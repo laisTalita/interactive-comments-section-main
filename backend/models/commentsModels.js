@@ -49,17 +49,6 @@ Comments.belongsTo(Comments,{as:'parent', foreignKey:'parent_id'})
 Comments.belongsTo(Users,{foreignKey:'user_id',as:'user'})
 Users.hasMany(Comments,{foreignKey:'user_id'})
 
-await Comments.update(
-  { score: 12 },       
-  { where: { user_id: 2 } } 
-);
-
-await Comments.update(
-  { score: 5 },       
-  { where: { user_id: 3 } } 
-);
-
-
 async function initializeDatabase() {
   try {
     await sequelize.sync();
@@ -90,7 +79,6 @@ async function initializeDatabase() {
     console.error('Erro ao inicializar o banco:', error);
   }
 }
-
 initializeDatabase();
 
 module.exports ={sequelize, Users, Comments}

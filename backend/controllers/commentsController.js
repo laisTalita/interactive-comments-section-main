@@ -87,13 +87,18 @@ async function alterComment(req,res) {
   }
 
 }
-async function score(req,res) {Z
+async function score(req,res) {
    const {userId, id,x} = req.body
 
    if (userId !== 1) {
     const comment = await Comments.findByPk(id);
      
-    comment.score +=x
+    if (x==='up') {
+      comment.score +=x
+    }
+    else{
+      comment.score -=x
+    }
     await comment.save();
     return res.json({ score: comment.score });
 }

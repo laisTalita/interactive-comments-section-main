@@ -11,8 +11,7 @@ function App() {
   const[component_delete, setComponent_delete]= useState(null)
   const[idComponent_delete, setIdComponent_delete]= useState(null)
   const[editForm,setEditForm] = useState(null)
-  const[votes,setVotes] = useState(null)
-
+ 
   const commentActions = {
     replying,
     setReplying,
@@ -25,8 +24,6 @@ function App() {
     vote,
     setEditForm,
     editForm,
-    votes,
-    setVotes
   }
 
   const fetch_init = ()=>{
@@ -42,11 +39,11 @@ function App() {
     useEffect(() => {
         fetch_init()
     },[])
-  function vote(id, userId, newVote) {
+  function vote(id, userId, x) {
     fetch("https://interactive-comments-section-main-70m9.onrender.com/comments/vote",{
       method:"put",
       headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({id, userId,newVote})
+      body: JSON.stringify({id, userId,x})
     })
     .then(res=> res.json())
     .then(() =>{
