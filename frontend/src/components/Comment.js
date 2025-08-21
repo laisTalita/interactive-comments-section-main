@@ -32,7 +32,7 @@ const { id, content, score, timeAgo, replying_to, user, parent_id } = comment;
                             {replying_to ?(
                                 <p className='inline'>
                                   <span className='span_repling'>@{replying_to} </span>{content}
-                                /p>
+                                </p>
                             ) 
                             :(content)
                             }
