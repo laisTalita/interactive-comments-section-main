@@ -2,11 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
-    "scripts": {
+  "scripts": {
     "start": "node index.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",

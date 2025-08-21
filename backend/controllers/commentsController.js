@@ -90,19 +90,19 @@ async function alterComment(req,res) {
 async function score(req,res) {
    const {userId, id,x} = req.body
 
-   if (userId !== 1) {
-    const comment = await Comments.findByPk(id);
-     
-    if (x==='up') {
-      comment.score +=x
-    }
-    else{
-      comment.score -=x
-    }
-    await comment.save();
-    return res.json({ score: comment.score });
-}
+   if (userId!==1) {
+       const comment = await Comments.findByPk(id);
+       if (x==="up"){
+          comment.score+=1
+       }
+       else{
+        comment.score-=1
 
+       }
+       await comment.save()
+      return res.json({score:comment.score})
+
+   }
 }
 module.exports={getAll, createComment,deleteComment, alterComment, score}
 

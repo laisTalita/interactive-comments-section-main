@@ -1,7 +1,11 @@
 const {Sequelize,DataTypes} =  require('sequelize')
 
-const sequelize = new Sequelize(
-process.env.DB_NAME,
+const sequelize =new Sequelize(
+  'interactive_comments',
+  'root','',
+  {host:'localhost'
+  ,dialect:'mysql'}
+  /*  process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
@@ -13,8 +17,9 @@ process.env.DB_NAME,
         rejectUnauthorized: false
       }
    }
-  }
-  );
+  } */
+
+);
 
 const Users = sequelize.define('users',{
   id:{
@@ -49,37 +54,5 @@ Comments.belongsTo(Comments,{as:'parent', foreignKey:'parent_id'})
 Comments.belongsTo(Users,{foreignKey:'user_id',as:'user'})
 Users.hasMany(Comments,{foreignKey:'user_id'})
 
-
-async function initializeDatabase() {
-  try {
-    await sequelize.sync();
-    const userCount = await Users.count();
-    if (userCount ===0) {
-      await Users.bulkCreate([
-      { id: 1, username: 'juliusomo', avatar_url: './images/avatars/image-juliusomo.png' },
-      { id: 2, username: 'amyrobson', avatar_url: './images/avatars/image-amyrobson.png' },
-      { id: 3, username: 'maxblagun', avatar_url: './images/avatars/image-maxblagun.png' },
-      { id: 4, username: 'ramsesmiron', avatar_url: './images/avatars/image-ramsesmiron.png' },
-    ]);
-    }
-    const commentExists = await Comments.findByPk(4);
-
-      if (!commentExists) {
-        await Comments.create({
-          id: 4,
-          user_id: 1,
-          parent_id: 2,
-          replying_to: 'ramsesmiron',
-          content: 'I couldn\'t agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.',
-          score: 2,
-          created_at: '2025-08-10 16:24:43'
-        });
-      }
-    console.log('Database initialized!');
-  } catch (error) {
-    console.error('Erro ao inicializar o banco:', error);
-  }
-}
-initializeDatabase();
 
 module.exports ={sequelize, Users, Comments}
