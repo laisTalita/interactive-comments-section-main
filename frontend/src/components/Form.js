@@ -18,7 +18,7 @@ function Form({buttonName,name,func}) {
                 placeholder= { name ? name :"Add a comment..."}
             ></textarea>
             </form>
-            <img src='./images/avatars/image-juliusomo.png'/>
+            <img src='./images/avatars/image-juliusomo.png' alt=''/>
             <button form="commentForm" className='button_form' type='submit'>{buttonName}</button>
         </div>
     </section>
