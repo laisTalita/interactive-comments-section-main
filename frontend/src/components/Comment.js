@@ -12,7 +12,7 @@ function scores(x) {
          newVote = null
     }
     actions.setVotes(newVote)
-  actions.vote(id ,user.id,votes)
+  actions.vote(id ,user.id,actions.votes)
 }
     return(
     <>
@@ -62,7 +62,7 @@ function scores(x) {
                     </button>
                 </div>
             {
-                user.id !== 1 ? (
+                user.id !== 1 ? (s
                     <button className='reply noJuli' 
                     onClick={()=>{
                         actions.setReplying(user.username);
