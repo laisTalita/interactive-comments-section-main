@@ -5,7 +5,7 @@ import Delete from "./components/Delete";
 
 function App() {
 
-  const[dados,setDados] = useState()
+  const[dados,setDados] = useState([])
   const[replying,setReplying] = useState(null)
   const[replyingToId,setReplyingToId] = useState(null)
   const[component_delete, setComponent_delete]= useState(null)
