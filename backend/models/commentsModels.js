@@ -1,7 +1,12 @@
 const {Sequelize,DataTypes} =  require('sequelize')
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
+  'interactive_comments','root','',
+  {
+    host:'localhost',
+    dialect:'mysql'
+  }
+  /*process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
@@ -13,7 +18,7 @@ const sequelize = new Sequelize(
         rejectUnauthorized: false
       }
    }
-  }
+  }*/
   );
 
 const Users = sequelize.define('users',{
@@ -49,12 +54,20 @@ Comments.belongsTo(Comments,{as:'parent', foreignKey:'parent_id'})
 Comments.belongsTo(Users,{foreignKey:'user_id',as:'user'})
 Users.hasMany(Comments,{foreignKey:'user_id'})
 
+await Comments.update(
+  { score: 12 },       
+  { where: { user_id: 2 } } 
+);
+
+await Comments.update(
+  { score: 5 },       
+  { where: { user_id: 3 } } 
+);
+
+
 async function initializeDatabase() {
   try {
-    // Cria as tabelas, se não existirem
-    await sequelize.sync({ force: true }); // force:true recria as tabelas a cada deploy
-
-    // Insere os usuários
+    await sequelize.sync({ force: true });
     await Users.bulkCreate([
       { id: 1, username: 'juliusomo', avatar_url: './images/avatars/image-juliusomo.png' },
       { id: 2, username: 'amyrobson', avatar_url: './images/avatars/image-amyrobson.png' },
@@ -62,7 +75,6 @@ async function initializeDatabase() {
       { id: 4, username: 'ramsesmiron', avatar_url: './images/avatars/image-ramsesmiron.png' },
     ]);
 
-    // Insere os comentários
     await Comments.bulkCreate([
       { id:1, user_id:2, parent_id:null, replying_to:null, content:'Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You\'ve nailed the design and the responsiveness at various breakpoints works really well.', score:12, created_at:'2025-07-03 16:24:06' },
       { id:2, user_id:3, parent_id:null, replying_to:null, content:'Woah, your project looks awesome! How long have you been coding for? I\'m still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!', score:5, created_at:'2025-08-01 16:24:21' },
@@ -76,7 +88,6 @@ async function initializeDatabase() {
   }
 }
 
-// Chama a função
 initializeDatabase();
 
 module.exports ={sequelize, Users, Comments}

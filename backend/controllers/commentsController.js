@@ -87,22 +87,17 @@ async function alterComment(req,res) {
   }
 
 }
-async function score(req,res) {
+async function score(req,res) {Z
    const {userId, id,x} = req.body
 
-   if (userId!==1) {
-       const comment = await Comments.findByPk(id);
-       if (x==="up"){
-          comment.score+=1
-       }
-       else{
-        comment.score-=1
+   if (userId !== 1) {
+    const comment = await Comments.findByPk(id);
+     
+    comment.score +=x
+    await comment.save();
+    return res.json({ score: comment.score });
+}
 
-       }
-       await comment.save()
-      return res.json({score:comment.score})
-
-   }
 }
 module.exports={getAll, createComment,deleteComment, alterComment, score}
 

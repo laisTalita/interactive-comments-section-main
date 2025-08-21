@@ -11,6 +11,7 @@ function App() {
   const[component_delete, setComponent_delete]= useState(null)
   const[idComponent_delete, setIdComponent_delete]= useState(null)
   const[editForm,setEditForm] = useState(null)
+  const[votes,setVotes] = useState(null)
 
   const commentActions = {
     replying,
@@ -20,76 +21,74 @@ function App() {
     setComponent_delete,
     setIdComponent_delete,
     print,
-    setEditForm,
-    editForm,
     update,
     vote,
+    setEditForm,
+    editForm,
+    votes,
+    setVotes
   }
 
-     const fetch_init = ()=>{
-      fetch('https://interactive-comments-section-main-70m9.onrender.com/comments')
-        .then(res => res.json())
-        .then(data => {
-          setDados(data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-      useEffect(() => {
-          fetch_init()
-     },[])
-    function vote(id, userId, x) {
-      fetch("https://interactive-comments-section-main-70m9.onrender.com/comments/vote",{
-        method:"put",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({id, userId,x})
+  const fetch_init = ()=>{
+    fetch('https://interactive-comments-section-main-70m9.onrender.com/comments')
+      .then(res => res.json())
+      .then(data => {
+        setDados(data);
       })
-      .then(res=> res.json())
-      .then(() =>{
+      .catch(error => {
+        console.log(error);
+      });
+  }
+    useEffect(() => {
         fetch_init()
-      })
-      .catch(err =>{
-        console.log(err)
-      })
-    }
-    function update(id, text) {
-       fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/updade',{
-          method:'put',
-          headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({
-            id, text
-          })
-        }).then(res=> res.json())
-        .then(()=>{
-          fetch_init()
-          setEditForm(null)
-        })
-          .catch(erro =>{
-            console.log("erro")
-          })
-    }
-    function print(content,replying_to =null,parent_id =null,user_id) {
-
-      fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/dados',{
-        method:'post',
+    },[])
+  function vote(id, userId, newVote) {
+    fetch("https://interactive-comments-section-main-70m9.onrender.com/comments/vote",{
+      method:"put",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({id, userId,newVote})
+    })
+    .then(res=> res.json())
+    .then(() =>{
+      fetch_init()
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
+  function update(id, text) {
+      fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/updade',{
+        method:'put',
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
-          content, replying_to,parent_id,user_id
+          id, text
         })
       }).then(res=> res.json())
       .then(()=>{
         fetch_init()
-         setReplying(null);
-          setReplyingToId(null);
+        setEditForm(null)
       })
-      .catch(err =>{
-        console.log(err)
+        .catch(erro =>{
+          console.log("erro")
+        })
+  }
+  function print(content,replying_to =null,parent_id =null,user_id) {
+    fetch('https://interactive-comments-section-main-70m9.onrender.com/comments/dados',{
+      method:'post',
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        content, replying_to,parent_id,user_id
       })
-    }
-
-    
-
+    }).then(res=> res.json())
+    .then(()=>{
+      fetch_init()
+      setReplying(null);
+      setReplyingToId(null);
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
   return (
     <div className="App">
       {
